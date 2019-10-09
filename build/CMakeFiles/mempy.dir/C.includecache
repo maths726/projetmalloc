@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/src/mem.h
+
+/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/tests/mempymodule.c
+python3.5m/Python.h
+-
+../src/mem.h
+/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/src/mem.h
+

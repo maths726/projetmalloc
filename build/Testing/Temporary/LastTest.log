@@ -1,0 +1,34 @@
+Start testing: Oct 09 10:47 CEST
+----------------------------------------------------------
+1/1 Testing: AllTestsAllocator
+1/1 Test: AllTestsAllocator
+Command: "/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/build/alloctest"
+Directory: /user/8/sauretm/Documents/projetmalloc/ensimag-malloc/build
+"AllTestsAllocator" start time: Oct 09 10:47 CEST
+Output:
+----------------------------------------------------------
+[==========] Running 12 tests from 4 test cases.
+[----------] Global test environment set-up.
+[----------] 1 test from Mark
+[ RUN      ] Mark.mmix
+/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/tests/test_mark.cc:22: Failure
+Value of: & tab[2]
+  Actual: 0x7ffce7e86a80
+Expected: pmem0
+Which is: 0x7ffce7e86a70
+[  FAILED  ] Mark.mmix (0 ms)
+[----------] 1 test from Mark (0 ms total)
+
+[----------] 7 tests from Basic
+[ RUN      ] Basic.zero
+[       OK ] Basic.zero (0 ms)
+[ RUN      ] Basic.onetinysmall
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Failed.
+"AllTestsAllocator" end time: Oct 09 10:47 CEST
+"AllTestsAllocator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 09 10:47 CEST
