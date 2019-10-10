@@ -12,12 +12,12 @@
 
 unsigned long knuth_mmix_one_round(unsigned long in)
 {
-    return in * 6364136223846793005UL % 1442695040888963407UL;
+    return (in * 6364136223846793005UL) % 1442695040888963407UL;
 }
 
 void *mark_memarea_and_get_user_ptr(void *ptr, unsigned long size, MemKind k)
 {
-    unsigned long magic = (knuth_mmix_one_round(size)& ~(0b11UL)) | k;
+    unsigned long magic = (knuth_mmix_one_round(size)& (~(0b11UL))) | k;
     unsigned long taille = 4*8 + size;
     *(unsigned long *)ptr = taille;
     *((unsigned long *)ptr + 1) = magic;
@@ -34,7 +34,7 @@ Alloc mark_check_and_get_alloc(void *ptr)
     a.size = *(int*)((unsigned long*)ptr - 2);
     a.kind = *((unsigned long*)ptr -1) & 0b11UL;
     unsigned long magic = (knuth_mmix_one_round(a.size)& ~(0b11UL)) | a.kind;
-    assert (magic == *((unsigned long*)ptr -1));
+    assert (magic == *((unsigned long*)ptr - 1));
     assert (magic == (unsigned long)*((char*)ptr + a.size-32));
     assert (a.size == (unsigned long)*((char*)ptr + a.size-24));
     return a;
