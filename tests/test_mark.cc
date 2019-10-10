@@ -18,6 +18,7 @@ TEST( Mark, mmix ) {
     unsigned long tab[NBCHUNK] = {};
   
     void *pmem0 = mark_memarea_and_get_user_ptr(tab, 32, SMALL_KIND);
+    //printf ("%ld %ld %ld %ld", tab[0],tab[1],tab[2],tab[3]);
     ASSERT_NE(pmem0, (void*)0);
     ASSERT_EQ(pmem0, & tab[2] );
     ASSERT_EQ(tab[1], knuth_mmix_one_round((unsigned long)tab) & ~(0b11UL));

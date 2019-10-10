@@ -12,31 +12,34 @@
 
 unsigned long knuth_mmix_one_round(unsigned long in)
 {
-    return (in * 6364136223846793005UL) % 1442695040888963407UL;
+    return in * 6364136223846793005UL % 1442695040888963407UL;
 }
 
-void *mark_memarea_and_get_user_ptr(void *ptr, unsigned long size, MemKind k)
-{
-    unsigned long magic = (knuth_mmix_one_round(size)& (~(0b11UL))) | k;
-    unsigned long taille = 4*8 + size;
-    *(unsigned long *)ptr = taille;
-    *((unsigned long *)ptr + 1) = magic;
-    *((char*)ptr +8+8+size) = magic;
-    *((char*)ptr +8+8+8+size) = taille;
-    ptr=(void*)((unsigned long*)ptr + 2);
-    return ptr;
+void* mark_memarea_and_get_user_ptr(void *ptr, unsigned long size, MemKind k){
+    //unsigned long taille_utile = size - 4*8;
+    unsigned long magic = knuth_mmix_one_round((unsigned long)ptr);
+    magic &= (~(0b11UL));
+    magic |= (k&(0b11));
+    *(unsigned long *)ptr = size;
+    *((unsigned long *)((char *)ptr + size) - 1 ) = size;
+    *((unsigned long *)ptr +1) = magic;
+    *((unsigned long *)((char *)ptr + size) - 2 ) = magic;
+
+    return (void*)((unsigned long*)ptr +2 );
 }
 
 Alloc mark_check_and_get_alloc(void *ptr)
 {
     Alloc a = {};
-    a.ptr = ptr;
-    a.size = *(int*)((unsigned long*)ptr - 2);
-    a.kind = *((unsigned long*)ptr -1) & 0b11UL;
-    unsigned long magic = (knuth_mmix_one_round(a.size)& ~(0b11UL)) | a.kind;
-    assert (magic == *((unsigned long*)ptr - 1));
-    assert (magic == (unsigned long)*((char*)ptr + a.size-32));
-    assert (a.size == (unsigned long)*((char*)ptr + a.size-24));
+    a.ptr = (void*)((unsigned long*)ptr - 2);
+    a.size = *(unsigned long*)a.ptr;
+    a.kind = *((unsigned long*)a.ptr + 1) & 0b11;
+    unsigned long size2 = *(unsigned long*)((char*)a.ptr + a.size - 8);
+    unsigned long magic1 = *((unsigned long*)a.ptr +1);
+    unsigned long magic2 = *(unsigned long*)((char*)a.ptr + a.size - 16);
+    //printf ("\n\nptr : %ld ; a.ptr : %ld ; a.size : %ld ; a.kind : %d ; size2 : %ld ; magic1 : %ld ; magic2 : %ld\n\n",(unsigned long) ptr,(unsigned long) a.ptr, a.size, a.kind , size2,magic1,magic2);
+    assert (a.size == size2);
+    assert (magic1 == magic2);
     return a;
 }
 

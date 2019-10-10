@@ -33,6 +33,4 @@ emalloc_small(unsigned long size)
 void efree_small(Alloc a) {
     *(void **)(a.ptr)= arena.chunkpool;
     arena.chunkpool = a.ptr;
-    
-    /* ecrire votre code ici */
 }
