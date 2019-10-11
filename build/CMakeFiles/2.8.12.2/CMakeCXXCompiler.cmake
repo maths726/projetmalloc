@@ -1,7 +1,7 @@
 set(CMAKE_CXX_COMPILER "/opt/rh/devtoolset-8/root/usr/bin/c++")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "GNU")
-set(CMAKE_CXX_COMPILER_VERSION "8.3.1")
+set(CMAKE_CXX_COMPILER_VERSION "8.2.1")
 set(CMAKE_CXX_PLATFORM_ID "Linux")
 
 set(CMAKE_AR "/opt/rh/devtoolset-8/root/usr/bin/ar")
