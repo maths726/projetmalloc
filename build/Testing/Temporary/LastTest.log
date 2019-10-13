@@ -1,0 +1,33 @@
+Start testing: Oct 13 15:07 CEST
+----------------------------------------------------------
+1/1 Testing: AllTestsAllocator
+1/1 Test: AllTestsAllocator
+Command: "/user/1/.base/gouloisw/home/Documents/projetmalloc/build/alloctest"
+Directory: /user/1/.base/gouloisw/home/Documents/projetmalloc/build
+"AllTestsAllocator" start time: Oct 13 15:07 CEST
+Output:
+----------------------------------------------------------
+[==========] Running 12 tests from 4 test cases.
+[----------] Global test environment set-up.
+[----------] 1 test from Mark
+[ RUN      ] Mark.mmix
+[       OK ] Mark.mmix (0 ms)
+[----------] 1 test from Mark (0 ms total)
+
+[----------] 7 tests from Basic
+[ RUN      ] Basic.zero
+[       OK ] Basic.zero (0 ms)
+[ RUN      ] Basic.onetinysmall
+[       OK ] Basic.onetinysmall (0 ms)
+[ RUN      ] Basic.onelargesmall
+[       OK ] Basic.onelargesmall (0 ms)
+[ RUN      ] Basic.onemedium
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Failed.
+"AllTestsAllocator" end time: Oct 13 15:07 CEST
+"AllTestsAllocator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 13 15:07 CEST

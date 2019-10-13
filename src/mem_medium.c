@@ -23,39 +23,56 @@ unsigned int puiss2(unsigned long size)
     return p;
 }
 
-void *emalloc_medium_aux(unsigned long size, int *counter)
+void *
+emalloc_medium_aux(unsigned long initial_size,unsigned long size)
 {
-    unsigned long size_puiss2 = puiss2(size);
-    unsigned long *list_free_blocks = arena.TZL[size_puiss2];
-    if (list_free_blocks > (FIRST_ALLOC_MEDIUM_EXPOSANT + arena.medium_next_exponant))
+    //on calcule l'indince de la TZL
+    unsigned int size_puiss2 = puiss2(size);
+    // printf("arena.TZL[7] :%p\n*arena.TZL[7] : %p",arena.TZL[size_puiss2],arena.TZL[size_puiss2]);
+    unsigned long *list_free_blocks = (unsigned long *)arena.TZL[size_puiss2];
+    //si on dépasse la taille max on réalloc et on découpe récursivement
+    if (size_puiss2 > (FIRST_ALLOC_MEDIUM_EXPOSANT + arena.medium_next_exponant))
     {
         mem_realloc_medium();
-    }
-    if (*list_free_blocks == NULL)
-    {
-        *counter++;
-        return emalloc_medium_aux(size * 2, &counter);
-    }
-    for (unsigned int i = 0; i < *counter; i++)
-    {
-        unsigned long *middle_free_block = *list_free_blocks + size / 2;
-        arena.TZL[size_puiss2 - i] = middle_free_block;
+        return emalloc_medium_aux(initial_size,size/2);
     }
 
+    //sinon on découpe récursivement un bloc plus gros
+    if (list_free_blocks == 0x0UL)
+    {
+        return emalloc_medium_aux(initial_size,size * 2);
+    }
+    //si un bloc est disponible on le marque et on renvoie l'adresse user
+    else {
+      unsigned long *middle_free_block=list_free_blocks;
+      while (size!=initial_size){
+        middle_free_block +=(size / 2);
+        arena.TZL[size_puiss2-1] = middle_free_block;
+        size/=2;
+      }
+
+      return mark_memarea_and_get_user_ptr(middle_free_block,size,MEDIUM_KIND);
+    }
     return (void *)0;
+
 }
 
-void *
-emalloc_medium(unsigned long size)
-{
-    assert(size < LARGEALLOC);
-    assert(size > SMALLALLOC);
-    int *counter;
-    *counter = 0;
-    return emalloc_medium_aux(size, counter);
+void *emalloc_medium(unsigned long size){
+  assert(size < LARGEALLOC);
+  assert(size > SMALLALLOC);
+  // mem_realloc_medium();
+  unsigned long initial_size=size;
+  return emalloc_medium_aux(initial_size,size);
 }
 
 void efree_medium(Alloc a)
 {
-    void *adresse_buddy = a.ptr ^ a.size;
+    unsigned long *adresse_buddy = (unsigned long*)((unsigned long)a.ptr ^ a.size);
+    if ((unsigned long*)arena.TZL[a.size]!=adresse_buddy){
+      arena.TZL[a.size]=adresse_buddy;
+    }
+    else{
+      arena.TZL[a.size]=NULL;
+      //recommencer avec bloc fusionné et la liste de l'indice suivant ???
+    }
 }
