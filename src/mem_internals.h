@@ -72,7 +72,6 @@ extern "C"
     unsigned long mem_realloc_medium();
 
     void *emalloc_small(unsigned long size);
-    void *emalloc_medium_aux(unsigned long size, int *counter);
     void *emalloc_medium(unsigned long size);
     void *emalloc_large(unsigned long size);
 

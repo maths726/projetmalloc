@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/src/mem.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem.h
 
-/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/src/mem_internals.c
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_internals.c
 sys/mman.h
 -
 assert.h
@@ -16,13 +16,23 @@ assert.h
 stdint.h
 -
 mem.h
-/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/src/mem.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem.h
 mem_internals.h
-/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/src/mem_internals.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_internals.h
 
-/user/8/sauretm/Documents/projetmalloc/ensimag-malloc/src/mem_internals.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_internals.h
 stdio.h
 -
 stdlib.h
 -
+
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_medium.c
+stdint.h
+-
+assert.h
+-
+mem.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem.h
+mem_internals.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_internals.h
 

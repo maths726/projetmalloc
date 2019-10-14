@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /user/8/sauretm/Documents/projetmalloc/ensimag-malloc
+CMAKE_SOURCE_DIR = /user/1/.base/gouloisw/home/Documents/projetmalloc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /user/8/sauretm/Documents/projetmalloc/ensimag-malloc/build
+CMAKE_BINARY_DIR = /user/1/.base/gouloisw/home/Documents/projetmalloc/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -73,7 +73,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/bin/cpack --config ./CPackSourceConfig.cmake /user/8/sauretm/Documents/projetmalloc/ensimag-malloc/build/CPackSourceConfig.cmake
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /user/1/.base/gouloisw/home/Documents/projetmalloc/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -102,9 +102,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /user/8/sauretm/Documents/projetmalloc/ensimag-malloc/build/CMakeFiles /user/8/sauretm/Documents/projetmalloc/ensimag-malloc/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /user/1/.base/gouloisw/home/Documents/projetmalloc/build/CMakeFiles /user/1/.base/gouloisw/home/Documents/projetmalloc/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /user/8/sauretm/Documents/projetmalloc/ensimag-malloc/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /user/1/.base/gouloisw/home/Documents/projetmalloc/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

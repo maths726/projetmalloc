@@ -1,7 +1,7 @@
 set(CMAKE_C_COMPILER "/opt/rh/devtoolset-8/root/usr/bin/cc")
 set(CMAKE_C_COMPILER_ARG1 "")
 set(CMAKE_C_COMPILER_ID "GNU")
-set(CMAKE_C_COMPILER_VERSION "8.3.1")
+set(CMAKE_C_COMPILER_VERSION "8.2.1")
 set(CMAKE_C_PLATFORM_ID "Linux")
 
 set(CMAKE_AR "/opt/rh/devtoolset-8/root/usr/bin/ar")
