@@ -8,6 +8,18 @@
 
 /user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem.h
 
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_internals.c
+sys/mman.h
+-
+assert.h
+-
+stdint.h
+-
+mem.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem.h
+mem_internals.h
+/user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_internals.h
+
 /user/1/.base/gouloisw/home/Documents/projetmalloc/src/mem_internals.h
 stdio.h
 -

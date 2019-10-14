@@ -28,8 +28,8 @@ emalloc_medium_aux(unsigned long initial_size,unsigned long size)
 {
     //on calcule l'indince de la TZL
     unsigned int size_puiss2 = puiss2(size);
-    // printf("arena.TZL[7] :%p\n*arena.TZL[7] : %p",arena.TZL[size_puiss2],arena.TZL[size_puiss2]);
-    unsigned long *list_free_blocks = (unsigned long *)arena.TZL[size_puiss2];
+    void *list_free_blocks = arena.TZL[size_puiss2];
+
     //si on dépasse la taille max on réalloc et on découpe récursivement
     if (size_puiss2 > (FIRST_ALLOC_MEDIUM_EXPOSANT + arena.medium_next_exponant))
     {
@@ -38,21 +38,24 @@ emalloc_medium_aux(unsigned long initial_size,unsigned long size)
     }
 
     //sinon on découpe récursivement un bloc plus gros
-    if (list_free_blocks == 0x0UL)
+    if (list_free_blocks == (void *) 0x0)
     {
         return emalloc_medium_aux(initial_size,size * 2);
     }
     //si un bloc est disponible on le marque et on renvoie l'adresse user
-    else {
-      unsigned long *middle_free_block=list_free_blocks;
-      while (size!=initial_size){
-        middle_free_block +=(size / 2);
-        arena.TZL[size_puiss2-1] = middle_free_block;
-        size/=2;
-      }
 
+      void*middle_free_block=(void*)list_free_blocks;
+      middle_free_block = list_free_blocks;
+      while (size!=initial_size){
+        unsigned int i=1;
+        (*(void **)middle_free_block) = (void*)((char*)middle_free_block + size/2);
+        middle_free_block = *(void **) middle_free_block;
+        arena.TZL[size_puiss2-i] = middle_free_block;
+        size/=2;
+        i++;
+      }
       return mark_memarea_and_get_user_ptr(middle_free_block,size,MEDIUM_KIND);
-    }
+
     return (void *)0;
 
 }
@@ -60,7 +63,6 @@ emalloc_medium_aux(unsigned long initial_size,unsigned long size)
 void *emalloc_medium(unsigned long size){
   assert(size < LARGEALLOC);
   assert(size > SMALLALLOC);
-  // mem_realloc_medium();
   unsigned long initial_size=size;
   return emalloc_medium_aux(initial_size,size);
 }
@@ -73,6 +75,5 @@ void efree_medium(Alloc a)
     }
     else{
       arena.TZL[a.size]=NULL;
-      //recommencer avec bloc fusionné et la liste de l'indice suivant ???
     }
 }

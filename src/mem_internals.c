@@ -37,7 +37,7 @@ Alloc mark_check_and_get_alloc(void *ptr)
     unsigned long size2 = *(unsigned long*)((char*)a.ptr + a.size - 8);
     unsigned long magic1 = *((unsigned long*)a.ptr +1);
     unsigned long magic2 = *(unsigned long*)((char*)a.ptr + a.size - 16);
-    //printf ("\n\nptr : %ld ; a.ptr : %ld ; a.size : %ld ; a.kind : %d ; size2 : %ld ; magic1 : %ld ; magic2 : %ld\n\n",(unsigned long) ptr,(unsigned long) a.ptr, a.size, a.kind , size2,magic1,magic2);
+    // printf ("\n\nptr : %ld ; a.ptr : %ld ; a.size : %ld ; a.kind : %d ; size2 : %ld ; magic1 : %ld ; magic2 : %ld\n\n",(unsigned long) ptr,(unsigned long) a.ptr, a.size, a.kind , size2,magic1,magic2);
     assert (a.size == size2);
     assert (magic1 == magic2);
     return a;
@@ -86,7 +86,7 @@ mem_realloc_medium() {
 unsigned int
 nb_TZL_entries() {
     int nb = 0;
-    
+
     for(int i=0; i < TZL_SIZE; i++)
 	if ( arena.TZL[i] )
 	    nb ++;
